@@ -24,7 +24,7 @@ namespace UnityStandardAssets.CrossPlatformInput.Inspector
             }
         }
 
-
+		//fisk
         [MenuItem("Mobile Input/Enable")]
         private static void Enable()
         {
