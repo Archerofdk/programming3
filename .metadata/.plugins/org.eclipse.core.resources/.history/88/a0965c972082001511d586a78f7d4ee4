@@ -1,0 +1,81 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import javax.swing.JApplet;
+
+public class AppletGetData extends JApplet implements Runnable
+{
+	private int screenX = 1920;
+	private int screenY = 1080;
+	int n = 0;
+	Thread writeToFile;
+	boolean running = true;
+	
+	public void AppletGetData ()
+	{
+		
+	}
+	public void init ()
+	{
+		GetData getData = new GetData();
+		writeToFile = new Thread(this);
+		writeToFile.start();
+		
+	}
+	public void destroy ()
+	{
+		running = false;
+		writeToFile = null;
+	}
+	
+	public void run()
+	{
+		File file = new File("test1.txt");
+		BufferedWriter printOut = null;
+		try {
+			printOut = new BufferedWriter(new FileWriter(file));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		while(running)
+		{
+			if (!file.exists())
+			{
+				try {
+					file.createNewFile();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (file.exists())
+			{
+				
+				try {
+					if (GetData.gX > 0 && GetData.gY > 0 && GetData.gX < screenX && GetData.gY < screenY)
+					{
+						n++;
+						printOut.write("x = " + GetData.gX+ " y = "+ GetData.gY + " Looking at screen(" +n+") frames in all");
+						printOut.newLine();
+						printOut.flush();
+					}
+					
+					else
+					{
+						printOut.write("Not looking at screen.");
+						printOut.newLine();
+						printOut.flush();
+					}
+					
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		}
+	}
+}
