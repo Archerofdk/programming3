@@ -1,9 +1,16 @@
+import java.applet.*;
+import java.awt.*;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
 import netscape.javascript.*;
+
+import javax.print.Doc;
 import javax.swing.JApplet;
+import javax.swing.JLabel;
+
 import java.util.Date;
 
 
@@ -74,7 +81,7 @@ public class AppletGetData extends JApplet implements Runnable
 			date = new Date();
 			String time = date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
 			
-			// See which page we are on and how far down the scrollbar is.
+			// See which page we are on.
 			checkHomepage();
 			checkScrollbar();
 			
@@ -154,7 +161,6 @@ public class AppletGetData extends JApplet implements Runnable
 		int clientHeight = (int) win.getMember("clientHeight");
 		
 		int scrollbarPosition = scrollHeight - clientHeight;
-		//how far down the scrollbar is in percent
 		SBPpercent = (scrollbarTop / scrollbarPosition) * 100;
 	}
 }

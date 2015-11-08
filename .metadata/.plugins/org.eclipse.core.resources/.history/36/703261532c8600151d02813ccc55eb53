@@ -1,9 +1,13 @@
+import java.applet.Applet;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
 import netscape.javascript.*;
 import javax.swing.JApplet;
+import javax.swing.JLabel;
+
 import java.util.Date;
 
 
@@ -17,7 +21,6 @@ public class AppletGetData extends JApplet implements Runnable
 	boolean running = true;
 	File file = new File("D:\\Desktop\\Medialogy\\P3\\DataFiles\\Test"+n+".txt");
 	String homepage;
-	private int SBPpercent;
 	
 	public AppletGetData ()
 	{
@@ -74,16 +77,15 @@ public class AppletGetData extends JApplet implements Runnable
 			date = new Date();
 			String time = date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
 			
-			// See which page we are on and how far down the scrollbar is.
+			// See which page we are on.
 			checkHomepage();
-			checkScrollbar();
 			
 				try {
 					// if looking at screen.
 					if (GetData.gX > 0 && GetData.gY > 0 && GetData.gX < screenX && GetData.gY < screenY)
 					{
 						//printout x, y, page, location of scrollbar, and time, to file.
-						printOut.write("x = " + GetData.gX+ " y = "+ GetData.gY + " on page: " + homepage + "with scrollbar "+SBPpercent+"% from the top"+" at time: " + time);
+						printOut.write("x = " + GetData.gX+ " y = "+ GetData.gY + " on page: " + homepage +" at time: " + time);
 						printOut.newLine();
 						printOut.flush();
 					}
@@ -143,18 +145,5 @@ public class AppletGetData extends JApplet implements Runnable
 		{
 			homepage = null;
 		}
-	}
-	public void checkScrollbar ()
-	{
-		JSObject win = (JSObject) JSObject.getWindow(this);
-		//JSObject doc = (JSObject) win.getMember("document");
-		//JSObject loc = (JSObject) doc.getMember("location");
-		int scrollbarTop = (int) win.getMember("pageYOffset");
-		int scrollHeight = (int) win.getMember("scrollHeight");
-		int clientHeight = (int) win.getMember("clientHeight");
-		
-		int scrollbarPosition = scrollHeight - clientHeight;
-		//how far down the scrollbar is in percent
-		SBPpercent = (scrollbarTop / scrollbarPosition) * 100;
 	}
 }
