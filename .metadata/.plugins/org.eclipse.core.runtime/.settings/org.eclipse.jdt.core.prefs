@@ -7,3 +7,4 @@ org.eclipse.jdt.core.compiler.compliance=1.8
 org.eclipse.jdt.core.compiler.problem.assertIdentifier=error
 org.eclipse.jdt.core.compiler.problem.enumIdentifier=error
 org.eclipse.jdt.core.compiler.source=1.8
+org.eclipse.jdt.core.userLibrary.OpenCV\ -\ 3.0=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<userlibrary systemlibrary\="false" version\="2">\r\n\t<archive path\="D\:/Program Files (x86)/OpenCv3/opencv/build/java/opencv-300.jar">\r\n\t\t<attributes>\r\n\t\t\t<attribute name\="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value\="D\:/Program Files (x86)/OpenCv3/opencv/build/java/x64"/>\r\n\t\t</attributes>\r\n\t</archive>\r\n</userlibrary>\r\n
