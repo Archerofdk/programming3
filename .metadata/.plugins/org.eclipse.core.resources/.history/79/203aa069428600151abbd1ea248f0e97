@@ -2,7 +2,11 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+<<<<<<< HEAD
+
+=======
 import netscape.javascript.*;
+>>>>>>> 0bde81aef11c253b7bfd553cdbbcdd7c785dffa0
 import javax.swing.JApplet;
 import java.util.Date;
 
