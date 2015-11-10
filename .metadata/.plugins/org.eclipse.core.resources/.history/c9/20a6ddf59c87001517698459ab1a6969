@@ -76,7 +76,7 @@ public class AppletGetData extends JApplet implements Runnable
 			
 			// See which page we are on and how far down the scrollbar is.
 			checkHomepage();
-			//checkScrollbar();
+			checkScrollbar();
 			
 				try {
 					// if looking at screen.

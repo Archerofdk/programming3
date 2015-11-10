@@ -76,7 +76,7 @@ public class AppletGetData extends JApplet implements Runnable
 			
 			// See which page we are on and how far down the scrollbar is.
 			checkHomepage();
-			//checkScrollbar();
+			checkScrollbar();
 			
 				try {
 					// if looking at screen.
@@ -144,7 +144,7 @@ public class AppletGetData extends JApplet implements Runnable
 			homepage = null;
 		}
 	}
-	/*public void checkScrollbar ()
+	public void checkScrollbar ()
 	{
 		JSObject win = (JSObject) JSObject.getWindow(this);
 		//JSObject doc = (JSObject) win.getMember("document");
@@ -156,5 +156,5 @@ public class AppletGetData extends JApplet implements Runnable
 		int scrollbarPosition = scrollHeight - clientHeight;
 		//how far down the scrollbar is in percent
 		SBPpercent = (scrollbarTop / scrollbarPosition) * 100;
-	}*/
+	}
 }
