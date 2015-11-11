@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -32,6 +33,12 @@ public class AppletGetData extends JApplet implements Runnable
 		
 		
 	}
+	public void paint (Graphics g)
+	{
+		g.drawString ("here: "+GetData.gX + GetData.gY, 25, 50);
+		repaint();
+	}
+	
 	public void destroy ()
 	{
 		running = false;
@@ -73,6 +80,8 @@ public class AppletGetData extends JApplet implements Runnable
 			//Get the time.
 			date = new Date();
 			String time = date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+			int gX = (int) GetData.gX;
+			int gY = (int) GetData.gY;
 			
 			// See which page we are on and how far down the scrollbar is.
 			checkHomepage();
@@ -80,13 +89,13 @@ public class AppletGetData extends JApplet implements Runnable
 			
 				try {
 					// if looking at screen.
-					if (GetData.gX > 0 && GetData.gY > 0 && GetData.gX < screenX && GetData.gY < screenY)
-					{
+					//if (GetData.gX > 0 && GetData.gY > 0 && GetData.gX < screenX && GetData.gY < screenY)
+					//{
 						//printout x, y, page, location of scrollbar, and time, to file.
-						printOut.write("x = " + GetData.gX+ " y = "+ GetData.gY + " on page: " + homepage + "with scrollbar "+SBPpercent+"% from the top"+" at time: " + time);
+						printOut.write("x = " + gX+ " y = "+ gY + " on page: " + homepage + " with scrollbar "+SBPpercent+"% from the top"+" at time: " + time);
 						printOut.newLine();
 						printOut.flush();
-					}
+					//}
 					
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -141,10 +150,10 @@ public class AppletGetData extends JApplet implements Runnable
 		}
 		else
 		{
-			homepage = null;
+			homepage = location;
 		}
 	}
-	/*public void checkScrollbar ()
+	public void checkScrollbar ()
 	{
 		JSObject win = (JSObject) JSObject.getWindow(this);
 		//JSObject doc = (JSObject) win.getMember("document");
@@ -156,5 +165,5 @@ public class AppletGetData extends JApplet implements Runnable
 		int scrollbarPosition = scrollHeight - clientHeight;
 		//how far down the scrollbar is in percent
 		SBPpercent = (scrollbarTop / scrollbarPosition) * 100;
-	}*/
+	}
 }

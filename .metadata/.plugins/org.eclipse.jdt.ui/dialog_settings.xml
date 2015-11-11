@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<item value="D:\Program Files (x86)\SourceTree\Programming3\GetData\libs" key="org.eclipse.jdt.ui.lastextjar"/>
+	<item value="C:\Program Files\Java\jre1.8.0_65\lib" key="org.eclipse.jdt.ui.lastextjar"/>
 	<section name="org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart">
 		<item value="2" key="layout"/>
 		<item value="true" key="group_libraries"/>
@@ -45,6 +45,7 @@
 		<item value="false" key="JarManifestWizardPage.SAVE_MANIFEST"/>
 		<item value="false" key="JarPackageWizardPage.EXPORT_OUTPUT_FOLDER"/>
 		<list key="JarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="C:\Users\Dragonalias\Dropbox\Apps\My.DropPages\msm1.droppages.com\Templates\AppletGetData.jar"/>
 			<item value="D:\Desktop\AppletGetData.jar"/>
 		</list>
 	</section>
