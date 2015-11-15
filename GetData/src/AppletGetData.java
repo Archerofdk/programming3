@@ -1,10 +1,14 @@
-import java.awt.Graphics;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import netscape.javascript.*;
 import javax.swing.JApplet;
+
+import java.util.Arrays;
 import java.util.Date;
 
 
@@ -19,6 +23,9 @@ public class AppletGetData extends JApplet implements Runnable
 	File file = new File("D:\\Desktop\\Medialogy\\P3\\DataFiles\\Test"+n+".txt");
 	String homepage;
 	private int SBPpercent;
+	String last;
+	private int x;
+	private int y;
 	
 	public AppletGetData ()
 	{
@@ -27,16 +34,10 @@ public class AppletGetData extends JApplet implements Runnable
 	public void init ()
 	{
 		//Initiate the GetData class to gather data and the writeToFile thread to put the data in a textfile.
-		GetData getData = new GetData();
 		writeToFile = new Thread(this);
 		writeToFile.start();
 		
 		
-	}
-	public void paint (Graphics g)
-	{
-		g.drawString ("here: "+GetData.gX + GetData.gY, 25, 50);
-		repaint();
 	}
 	
 	public void destroy ()
@@ -47,9 +48,6 @@ public class AppletGetData extends JApplet implements Runnable
 	
 	public void run()
 	{
-
-		
-		
 		BufferedWriter printOut = null;
 		
 		// If the filename already exists, it calls the method to do some recursion.
@@ -77,11 +75,15 @@ public class AppletGetData extends JApplet implements Runnable
 		
 		while(running)
 		{
+			try {
+				getData();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			//Get the time.
 			date = new Date();
 			String time = date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
-			int gX = (int) GetData.gX;
-			int gY = (int) GetData.gY;
 			
 			// See which page we are on and how far down the scrollbar is.
 			checkHomepage();
@@ -89,13 +91,13 @@ public class AppletGetData extends JApplet implements Runnable
 			
 				try {
 					// if looking at screen.
-					//if (GetData.gX > 0 && GetData.gY > 0 && GetData.gX < screenX && GetData.gY < screenY)
-					//{
+					if (!last.equals("heartbeat") && x > 0 && x < screenX && y > 0 && y < screenY)
+					{
 						//printout x, y, page, location of scrollbar, and time, to file.
-						printOut.write("x = " + gX+ " y = "+ gY + " on page: " + homepage + " with scrollbar "+SBPpercent+"% from the top"+" at time: " + time);
+						printOut.write("x:"+ x +" y:"+y+",on page:" + homepage + ",with scrollbar:"+SBPpercent+"%,from the top, at time:" + time);
 						printOut.newLine();
 						printOut.flush();
-					//}
+					}
 					
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -104,7 +106,7 @@ public class AppletGetData extends JApplet implements Runnable
 				try
 	               {
 	                     // Wait 250 milliseconds before continuing
-	                    writeToFile.sleep(250);
+	                    writeToFile.sleep(150);
 	               }
 	               catch (InterruptedException e)
 	               {
@@ -115,6 +117,10 @@ public class AppletGetData extends JApplet implements Runnable
 		}
 		
 	}
+	
+	
+	
+	
 	
 	//a recursive method that keeps adding 1 to n until the filename is free.
 	public void checkFile(File file)
@@ -132,21 +138,21 @@ public class AppletGetData extends JApplet implements Runnable
 	public void checkHomepage ()
 	{
 		String location = getDocumentBase().toString();
-		String home = "http://asgarddk.wix.com/msm1";
-		String films = "http://asgarddk.wix.com/msm1#!films/cwzt";
-		String series = "http://asgarddk.wix.com/msm1#!series/chrj";
+		String home = "http://testserver3.weebly.com/";
+		String films = "http://testserver3.weebly.com/movie.html";
+		String series = "http://testserver3.weebly.com/tv-pograms.html";
 		
 		if (location.equals(home))
 		{
-			homepage = "home";
+			homepage = "Home";
 		}
 		if (location.equals(films))
 		{
-			homepage = "films";
+			homepage = "Movies";
 		}
 		if (location.equals(series))
 		{
-			homepage = "series";
+			homepage = "Tv Programs";
 		}
 		else
 		{
@@ -165,5 +171,28 @@ public class AppletGetData extends JApplet implements Runnable
 		int scrollbarPosition = scrollHeight - clientHeight;
 		//how far down the scrollbar is in percent
 		SBPpercent = (scrollbarTop / scrollbarPosition) * 100;
+	}
+	public void getData() throws IOException
+	{
+		
+		BufferedReader input = new BufferedReader(new FileReader("D:\\Desktop\\Test.txt"));
+		String line;
+
+	    while ((line = input.readLine()) != null) 
+	    {
+	        last = line;
+	    }
+	    
+	    if (last.contains("tracker"))
+        {
+        	last = last.replaceAll("[^-?0-9]+", " ");
+        	String [] num = last.split(" ");
+        	x = Integer.parseInt(num[2]);
+        	y = Integer.parseInt(num [4]);
+        }
+        else
+        {
+        	last = "heartbeat";
+        }
 	}
 }
