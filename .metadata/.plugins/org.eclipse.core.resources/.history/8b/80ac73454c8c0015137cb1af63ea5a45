@@ -14,7 +14,7 @@ import java.util.Date;
 
 public class AppletGetData extends JApplet implements Runnable
 {
-	private int screenX = 1280;
+	private int screenX = 1920;
 	private int screenY = 1080;
 	private int n = 1;
 	Thread writeToFile;
@@ -94,7 +94,7 @@ public class AppletGetData extends JApplet implements Runnable
 					if (!last.equals("heartbeat") && x > 0 && x < screenX && y > 0 && y < screenY)
 					{
 						//printout x, y, page, location of scrollbar, and time, to file.
-						printOut.write(x +":"+y+":" + homepage + ":"+SBPpercent+":" + time);
+						printOut.write("x:"+ x +" y:"+y+",on page:" + homepage + ",with scrollbar:"+SBPpercent+"%,from the top, at time:" + time);
 						printOut.newLine();
 						printOut.flush();
 					}
@@ -105,7 +105,7 @@ public class AppletGetData extends JApplet implements Runnable
 				}
 				try
 	               {
-	                     // Wait 150 milliseconds before continuing
+	                     // Wait 250 milliseconds before continuing
 	                    writeToFile.sleep(150);
 	               }
 	               catch (InterruptedException e)
