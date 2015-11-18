@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
 
 import netscape.javascript.*;
 import javax.swing.JApplet;
@@ -22,7 +23,9 @@ public class AppletGetData extends JApplet implements Runnable
 	boolean running = true;
 	File file = new File("D:\\Desktop\\Medialogy\\P3\\DataFiles\\Test"+n+".txt");
 	String homepage;
-	private int SBPpercent;
+	private double scrollbarTop;
+	private double scrollMax;
+	private double scrollPercent;
 	String last;
 	private int x;
 	private int y;
@@ -33,10 +36,10 @@ public class AppletGetData extends JApplet implements Runnable
 	}
 	public void init ()
 	{
-		//Initiate the GetData class to gather data and the writeToFile thread to put the data in a textfile.
+		//Initiate the writeToFile thread to put the data in a textfile.
 		writeToFile = new Thread(this);
 		writeToFile.start();
-		
+		checkHomepage();
 		
 	}
 	
@@ -45,6 +48,8 @@ public class AppletGetData extends JApplet implements Runnable
 		running = false;
 		writeToFile = null;
 	}
+	
+	
 	
 	public void run()
 	{
@@ -85,16 +90,15 @@ public class AppletGetData extends JApplet implements Runnable
 			date = new Date();
 			String time = date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
 			
-			// See which page we are on and how far down the scrollbar is.
-			checkHomepage();
-			//checkScrollbar();
+			// See how far down the scrollbar is.
+			checkScrollbar();
 			
 				try {
 					// if looking at screen.
 					if (!last.equals("heartbeat") && x > 0 && x < screenX && y > 0 && y < screenY)
 					{
-						//printout x, y, page, location of scrollbar, and time, to file.
-						printOut.write(x +":"+y+":" + homepage + ":"+SBPpercent+":" + time);
+						//printout x, y, page, the location of the scrollbar in pixels from the top, max amount you can scroll, how much is scrolled in percent, and time, to file.
+						printOut.write(x +";"+y+";" + homepage + ";"+scrollbarTop+";"+scrollMax+";"+scrollPercent+";" + time);
 						printOut.newLine();
 						printOut.flush();
 					}
@@ -106,7 +110,7 @@ public class AppletGetData extends JApplet implements Runnable
 				try
 	               {
 	                     // Wait 150 milliseconds before continuing
-	                    writeToFile.sleep(150);
+	                    writeToFile.sleep(50);
 	               }
 	               catch (InterruptedException e)
 	               {
@@ -138,40 +142,9 @@ public class AppletGetData extends JApplet implements Runnable
 	public void checkHomepage ()
 	{
 		String location = getDocumentBase().toString();
-		String home = "http://testserver3.weebly.com/";
-		String films = "http://testserver3.weebly.com/movie.html";
-		String series = "http://testserver3.weebly.com/tv-pograms.html";
-		
-		if (location.equals(home))
-		{
-			homepage = "Home";
-		}
-		if (location.equals(films))
-		{
-			homepage = "Movies";
-		}
-		if (location.equals(series))
-		{
-			homepage = "Tv Programs";
-		}
-		else
-		{
-			homepage = location;
-		}
+		homepage = location;
 	}
-	public void checkScrollbar ()
-	{
-		JSObject win = (JSObject) JSObject.getWindow(this);
-		//JSObject doc = (JSObject) win.getMember("document");
-		//JSObject loc = (JSObject) doc.getMember("location");
-		int scrollbarTop = (int) win.getMember("pageYOffset");
-		int scrollHeight = (int) win.getMember("scrollHeight");
-		int clientHeight = (int) win.getMember("clientHeight");
-		
-		int scrollbarPosition = scrollHeight - clientHeight;
-		//how far down the scrollbar is in percent
-		SBPpercent = (scrollbarTop / scrollbarPosition) * 100;
-	}
+	
 	public void getData() throws IOException
 	{
 		
@@ -194,5 +167,23 @@ public class AppletGetData extends JApplet implements Runnable
         {
         	last = "heartbeat";
         }
+	}
+	
+	public void checkScrollbar ()
+	{
+		try
+		{
+			//Get the window the applet is in
+			JSObject win = (JSObject) JSObject.getWindow(this);
+			
+			//Getting the position of the scrollbar and the max scrollbar, and the percent.
+			scrollbarTop =  (int) win.getMember ("scrollY");
+			scrollMax = (int) win.getMember("scrollMaxY");
+			scrollPercent = ((double)scrollbarTop/(double)scrollMax) * 100;
+		}
+		catch (JSException jse) {
+			jse.printStackTrace();
+			
+		}
 	}
 }
