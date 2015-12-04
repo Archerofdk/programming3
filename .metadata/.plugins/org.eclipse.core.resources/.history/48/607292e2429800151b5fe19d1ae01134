@@ -1,0 +1,38 @@
+import java.io.BufferedReader;
+	import java.io.FileReader;
+	import java.io.IOException;
+	
+public class HeatRead 
+{
+	
+		private int n = 1;
+		String last;
+		public static void main(String[] args) throws IOException 
+		{
+			ReadTest();
+
+		}
+		
+		
+		public static void ReadTest () throws IOException
+		{
+			
+			//for (int n = 1; n<123; n++)
+			//{
+				BufferedReader input = new BufferedReader(new FileReader("D:\\Desktop\\Medialogy\\P3\\DataFiles\\Test"+n+".txt"));
+				String line;
+				
+				while ((line = input.readLine()) != null) 
+			    {
+			        last = line;
+			        String[] LS = last.split(";");
+			      
+			        //fra 0 til 6
+			        double CheckThis = Double.parseDouble (LS[4]);
+			        System.out.println(CheckThis);
+			    }
+			//}
+			
+			
+		}
+}
