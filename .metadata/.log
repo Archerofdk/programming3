@@ -854,6 +854,7 @@ Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.
 
 !ENTRY org.eclipse.core.net 1 0 2015-12-07 16:26:05.895
 !MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+<<<<<<< HEAD
 >>>>>>> 8185fc1f04d71caa691728d7015746ffb632fdbb
 
 !ENTRY org.eclipse.jdt.debug 4 125 2015-12-07 17:55:36.962
@@ -902,3 +903,8 @@ user global configuration and to define the default location to store repositori
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+=======
+
+!ENTRY org.eclipse.core.resources 4 567 2015-12-07 17:20:02.869
+!MESSAGE The project description file (.project) for 'Heat' is missing.  This file contains important information about the project.  The project will not function properly until this file is restored.
+>>>>>>> de796d5dcee3f5bbd597dcde9b407345820ac192
