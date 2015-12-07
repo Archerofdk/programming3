@@ -11,7 +11,7 @@ public class EdgeDetect {
    try {
        
 	  int kernelSize = 9;
-	  System.loadLibrary( Core.NATIVE_LIBRARY_NAME);  // load opencv.dll file
+	  System.loadLibrary(Core.NATIVE_LIBRARY_NAME);  // load opencv.dll file
 	  
 	  Mat source = Imgcodecs.imread("Giraffe.jpg",  Imgcodecs.CV_LOAD_IMAGE_GRAYSCALE);
 	  Mat destination = new Mat(source.rows(),source.cols(),source.type());
@@ -40,7 +40,7 @@ public class EdgeDetect {
 	                 
 	       
 	     }
-	  };          
+	  }
 	  
 	  Imgproc.filter2D(source, destination, -2, kernel);
 	  Imgcodecs.imwrite("output.png", destination);
