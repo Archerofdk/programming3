@@ -1,0 +1,72 @@
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.nio.ByteBuffer;
+import javax.imageio.ImageIO;
+
+public class ServerSide {
+
+	public ServerSide(){
+		
+	}
+	
+	//public void StartConnect() throws IOException, InterruptedException{
+		
+        	
+        	public void run() 
+        	{
+        		ClientSide client = new ClientSide();
+        		ServerSocket serverSocket = new ServerSocket(13336);
+                if (client.Connect() != null)
+                {
+                	
+                	Socket socket = serverSocket.accept();
+                	client.Send(client.Connect());
+                	DataInputStream in = new DataInputStream (socket.getInputStream());
+                	
+                	int count;
+        	    boolean processing = true;
+        	    while (processing) {
+        	        try {
+        	            byte[] buffer = new byte[8192];
+        	            FileOutputStream fout = new FileOutputStream ("D:\\Desktop\\test2.jpg"); // fis is
+        	                                                                  // FileOutputStream
+        	            while ((count = in.read(buffer)) > 0) { // count is a integer
+        	                                                    // and 'in' is
+        	                                                    // InputStream
+        	                fout.write(buffer, 0, count);
+        	                fout.flush();
+        	                System.out.println(count+"server");
+
+        	            }
+        	            processing = false;
+        	        } catch (Exception e) {
+        	            processing = false;
+        	        }
+        	    }
+        	}
+            
+
+            /*byte[] sizeAr = new byte[4];
+            inputStream.read(sizeAr);
+
+            /*byte[] imageAr = new byte[size];
+            inputStream.read(imageAr);
+
+            BufferedImage image = ImageIO.read(new ByteArrayInputStream(sizeAr));
+
+            //System.out.println("Received " + image.getHeight() + "x" + image.getWidth() + ": " + System.currentTimeMillis());
+            ImageIO.write(image, "jpg", new File("D:\\Desktop\\test2.jpg"));*/
+            
+        	}
+        
+		
+        
+	}
+	

@@ -1,0 +1,44 @@
+
+
+package client;
+ 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.net.Socket;
+import java.net.UnknownHostException;
+ 
+import common.ByteArrayConversion;
+ 
+public class ClientSide {
+	
+	private static Socket socket;
+	private static String host = "devett";
+ 
+	public static void main(String[] args) {
+ 
+		try {
+			socket = new Socket(host, 6666);
+			System.out.println("Connection to host established.");
+		} catch (UnknownHostException e) {
+			System.err.println("Don't know about host: " + host);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+ 
+		try {
+			ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+			byte[] byteImage = (byte[])ois.readObject();
+			BufferedImage bufferedImage = ByteArrayConversion.fromByteArray(byteImage);
+			System.out.println(bufferedImage.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+	}
+}
+
