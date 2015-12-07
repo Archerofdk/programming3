@@ -21,7 +21,7 @@ public class Main {
 			    Socket s;
 
 			    System.out.println("Server Started");
-			    ss=new ServerSocket(7861);
+			    ss=new ServerSocket(786);
 
 			        while((i++ < maxcon) || (maxcon == 0))
 			        {
