@@ -1,5 +1,9 @@
 action=ASK
 configured=true
 eclipse.preferences.version=1
+<<<<<<< HEAD
 problemsZipEtag="62eaff-525f382b90f00"
+=======
+problemsZipEtag="850323-52615d8526340"
+>>>>>>> 8185fc1f04d71caa691728d7015746ffb632fdbb
 rememberSendAction=NONE
