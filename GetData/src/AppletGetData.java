@@ -109,7 +109,7 @@ public class AppletGetData extends JApplet implements Runnable
 				}
 				try
 	               {
-	                     // Wait 150 milliseconds before continuing
+	                     // Wait 50 milliseconds before continuing
 	                    writeToFile.sleep(50);
 	               }
 	               catch (InterruptedException e)

@@ -23,7 +23,7 @@ public class somethingsomething
 		}*/
 		public void run ()
 		{
-			
+			Mat image = Highgui.imread(getClass().getResource("/lena.png").getPath());
 		}
 		
 		
