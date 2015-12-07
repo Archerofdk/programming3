@@ -2,12 +2,20 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
+import org.opencv.core.Scalar;
+import org.opencv.core.CvType;
+import org.opencv.imgproc.Imgproc;
+import org.opencv.highgui.Highgui;
 	
 public class somethingsomething
 {
 
 		private static int n = 1;
 		static String last;
+		static { System.loadLibrary( Core.NATIVE_LIBRARY_NAME ); }
 		
 		/*public static void main(String[] args) throws IOException 
 		{
