@@ -5,7 +5,6 @@ INDEX VERSION 1.127+/Users/Archerofdk/programming3/.metadata/.plugins/org.eclips
 3954040986.index
 765977872.index
 821991389.index
-1295392239.index
 434691973.index
 3004609673.index
 84777399.index
