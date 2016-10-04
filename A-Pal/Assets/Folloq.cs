@@ -7,6 +7,7 @@ public class Folloq : MonoBehaviour {
 
 	public Transform Player;
 	NavMeshAgent agent;
+	Vector3 AgentPosition;
 	Vector3 PlayerPosition;
 	Vector3 destination;
 
@@ -29,12 +30,20 @@ public class Folloq : MonoBehaviour {
 
 	void goAndStop()
 	{
+		AgentPosition = this.transform.position;
 		PlayerPosition = Player.position;
-		 
-		if (Vector3.Distance (destination, PlayerPosition)>1.0f)
-		{
-			destination = PlayerPosition;
+		float Distance = Vector3.Distance (PlayerPosition, AgentPosition);
+
+		if  (Distance > 2.5f) {
+			destination = Player.position;
 			agent.destination = destination;
+			Debug.Log (Distance);
+
+
+		} else if (Distance < 2.5f)
+		{
+			agent.destination = destination * (-1);
+			Debug.Log (Distance);
 		}
 	}
 }
