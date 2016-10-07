@@ -20,7 +20,7 @@ public class Folloq : MonoBehaviour {
 		agent = GetComponent <NavMeshAgent>();
 		destination = agent.destination;
 		InvokeRepeating ("goAndStop", 0.5f, 0.5f);
-		Ani.enabled = false;
+
 	}
 	
 	// Update is called once per frame
@@ -36,18 +36,16 @@ public class Folloq : MonoBehaviour {
 		PlayerPosition = Player.position;
 		float Distance = Vector3.Distance (PlayerPosition, AgentPosition);
 
-		if  (Distance > 3.0f) {
+		if (Distance > 3.0f) {
 			destination = Player.position;
 			agent.destination = destination;
 			Debug.Log (Distance);
+			Ani.SetBool ("Aside", false);
 
-
-		} else if (Distance < 2f)
-		{
-			Ani.enabled = true;
+		} else if (Distance < 2f) {
+			Ani.SetBool ("Aside", true);
 			Debug.Log (Distance);
 
 		}
-
 	}
 }
