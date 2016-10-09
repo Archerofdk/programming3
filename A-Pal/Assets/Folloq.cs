@@ -11,7 +11,7 @@ public class Folloq : MonoBehaviour {
 	Vector3 PlayerPosition;
 	Vector3 destination;
 	public Animator Ani;
-
+	public bool Collided = false;
 
 
 	// Use this for initialization
@@ -26,9 +26,10 @@ public class Folloq : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-
+		
 
 	}
+		
 
 	void goAndStop()
 	{
@@ -39,12 +40,12 @@ public class Folloq : MonoBehaviour {
 		if (Distance > 3.0f) {
 			destination = Player.position;
 			agent.destination = destination;
-			Debug.Log (Distance);
+			//Debug.Log (Distance);
 			Ani.SetBool ("Aside", false);
 
 		} else if (Distance < 2f) {
 			Ani.SetBool ("Aside", true);
-			Debug.Log (Distance);
+			//Debug.Log (Distance);
 
 		}
 	}
