@@ -24,15 +24,21 @@ public class Move : MonoBehaviour
 
 	void MoveBox ()
 	{
+		GameObject Player = GameObject.Find ("FPSController");
 		if (move)
 		{
 			//Get the vector between this object and the player
-			Vector3 my_forward = this.gameObject.transform.position - GameObject.Find ("FPSController").transform.position;
+			Vector3 my_forward = transform.position - Player.transform.position;
 			//Debug.Log (my_forward);
 			//Make sure it doesn't go up or down
 			my_forward.y = 0;
-			//move the object in the direction given by the vector above
-			transform.position += my_forward.normalized * moveSpeed * Time.deltaTime;
+
+			if (my_forward.magnitude < 2)
+			{
+				//move the object in the direction given by the vector above
+				transform.position += my_forward.normalized * moveSpeed * Time.deltaTime;
+			}
+
 		}
 
 	}
