@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Mechanics : MonoBehaviour 
 {
+	public Text pressE;
+
 
 	// Use this for initialization
 	void Start () 
@@ -30,7 +33,7 @@ public class Mechanics : MonoBehaviour
 			
 			if (rayCast.collider.tag == "Crate")
 			{
-				//instructions ();
+				instructions ();
 				//If e is pressed, the crate can be moved
 				if (Input.GetKey ("e")) 
 				{
@@ -50,8 +53,17 @@ public class Mechanics : MonoBehaviour
 		} else 
 		{
 			GameObject.Find ("Crate").GetComponent<Move> ().move = false;
-			//updateText ();
+			updateText ();
 		}
+	}
+
+	private void instructions ()
+	{
+		pressE.text = "press e to push crate";
+	}
+	private void updateText ()
+	{
+		pressE.text = " ";
 	}
 
 }
