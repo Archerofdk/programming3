@@ -19,34 +19,39 @@ public class Folloq : MonoBehaviour {
 	{
 		agent = GetComponent <NavMeshAgent>();
 		destination = agent.destination;
-		InvokeRepeating ("goAndStop", 0.5f, 0.5f);
 
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		
+		goAndStop ();
 
 	}
 		
 
 	void goAndStop()
 	{
+		//Find the position of everything.
 		AgentPosition = this.transform.position;
 		PlayerPosition = Player.position;
 		float Distance = Vector3.Distance (PlayerPosition, AgentPosition);
+		//print (direction);
 
-		if (Distance > 3.0f) {
-			destination = Player.position;
-			agent.destination = destination;
-			//Debug.Log (Distance);
-			Ani.SetBool ("Aside", false);
+		//Set destination to player position
+		agent.destination = PlayerPosition;
 
-		} else if (Distance < 2f) {
-			Ani.SetBool ("Aside", true);
-			//Debug.Log (Distance);
+		 
+		//if the player gets too close to A-Pal
+		if (Distance < 3f) 
+		{
+			//rotate around the player
+			transform.RotateAround (PlayerPosition,Vector3.up, 70* Time.deltaTime);
+			//push away from from the player
+			transform.position -= (PlayerPosition - AgentPosition) * Time.deltaTime;
 
 		}
+
+			
 	}
 }

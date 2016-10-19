@@ -5,12 +5,12 @@ using System.Collections;
 public class Mechanics : MonoBehaviour 
 {
 	public Text pressE;
-
+	GameObject Crate;
 
 	// Use this for initialization
 	void Start () 
 	{
-		
+		Crate = GameObject.Find ("Crate");
 	}
 	
 	// Update is called once per frame
@@ -37,13 +37,13 @@ public class Mechanics : MonoBehaviour
 				//If e is pressed, the crate can be moved
 				if (Input.GetKey ("e")) 
 				{
-					GameObject.Find ("Crate").GetComponent<Move> ().move = true;
+					Crate.GetComponent<Move> ().move = true;
 
 
 				}
 				else
 				{
-					GameObject.Find ("Crate").GetComponent<Move> ().move = false;
+					Crate.GetComponent<Move> ().move = false;
 				}
 
 			}
@@ -52,7 +52,7 @@ public class Mechanics : MonoBehaviour
 
 		} else 
 		{
-			GameObject.Find ("Crate").GetComponent<Move> ().move = false;
+			Crate.GetComponent<Move> ().move = false;
 			updateText ();
 		}
 	}

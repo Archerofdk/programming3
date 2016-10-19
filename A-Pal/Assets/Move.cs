@@ -29,10 +29,11 @@ public class Move : MonoBehaviour
 		{
 			//Get the vector between this object and the player
 			Vector3 my_forward = transform.position - Player.transform.position;
-			//Debug.Log (my_forward);
+
 			//Make sure it doesn't go up or down
 			my_forward.y = 0;
 
+			//if the player isn't too far away
 			if (my_forward.magnitude < 2)
 			{
 				//move the object in the direction given by the vector above
@@ -42,9 +43,4 @@ public class Move : MonoBehaviour
 		}
 
 	}
-
-	/*void OnCollisionEnter (Collision other)
-	{
-		noMore = false;
-	}*/
 }
