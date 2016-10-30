@@ -25,6 +25,7 @@ public class Folloq : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+		//run this
 		goAndStop ();
 
 	}

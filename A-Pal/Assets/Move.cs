@@ -17,6 +17,7 @@ public class Move : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		//run this
 		MoveBox ();
 
 	}
@@ -24,20 +25,21 @@ public class Move : MonoBehaviour
 
 	void MoveBox ()
 	{
+		//Find the player
 		GameObject Player = GameObject.Find ("FPSController");
 		if (move)
 		{
 			//Get the vector between this object and the player
-			Vector3 my_forward = transform.position - Player.transform.position;
+			Vector3 my_push = transform.position - Player.transform.position;
 
 			//Make sure it doesn't go up or down
-			my_forward.y = 0;
+			my_push.y = 0;
 
 			//if the player isn't too far away
-			if (my_forward.magnitude < 2)
+			if (my_push.magnitude < 2)
 			{
 				//move the object in the direction given by the vector above
-				transform.position += my_forward.normalized * moveSpeed * Time.deltaTime;
+				transform.position += my_push.normalized * moveSpeed * Time.deltaTime;
 			}
 
 		}
